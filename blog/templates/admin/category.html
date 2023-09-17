@@ -1,0 +1,123 @@
+{% set active = "category" %}
+
+{% extends "admin/_layout.html" %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+{% set name = request.args.get('name') %}
+    <div class="container padding-top-m">
+
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Velonic</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Category</a></li>
+                                <li class="breadcrumb-item active">Form Validation</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Form Validation</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <div class="row">
+                {#% set req_name = request.args.get('name') %#}
+                {#% for index, each in category  %#}
+                    {% if editing %}
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="header-title">Custom styles</h4>
+                                    
+                                </div>
+                                <div class="card-body">
+                                    <form class="needs-validation" action="/owner/update/{{ editing.id }}" method="post">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="validationCustom01">First name</label>
+                                            <input type="text" class="form-control" id="validationCustom01" placeholder="Edit Category" name="category" value="{{editing.name}}" required="">
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="btn btn-primary" type="submit">Submit form</button>
+                                    </form>
+
+                                </div> <!-- end card-body-->
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+                    {% else %}
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="header-title">Custom styles</h4>
+                                    
+                                </div>
+                                <div class="card-body">
+                                    <form class="needs-validation" action="/owner/handle_category" method="post">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="validationCustom01">First name</label>
+                                            <input type="text" class="form-control" id="validationCustom01" placeholder="Category" name="category" required="">
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="btn btn-primary" type="submit">Submit form</button>
+                                    </form>
+
+                                </div> <!-- end card-body-->
+                            </div> <!-- end card-->
+                        </div> <!-- end col-->
+                    {% endif  %}
+                {#% endfor %#}
+                
+            </div>
+            <!-- end row -->
+
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-4">Inline edit</h4>
+                <div class="table-responsive">
+                    <table class="table table-centered mb-0 table-nowrap" id="inline-editable">
+                        <thead>
+                            <tr>
+                                <th>S/N</th>
+                                <th>Name</th>
+                                <th></th>
+                                <th></th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <!-- {% set name = request.args.get('name') %} -->
+                            {% for index, each in category %}
+                                <tr id="1">
+                                    <td><span class="tabledit-span tabledit-identifier">{{ index + 1 }}</span></td>
+                                    <td class="tabledit-view-mode" style="cursor: pointer;"><span class="tabledit-span">{{ each['name'] }}</span></td>
+                                    <!-- <td class="tabledit-view-mode" style="cursor: pointer;"><span class="tabledit-span"><a href="/owner/delete_category?name={{each['name']}}">Delete</a></span></td> -->
+                                    <td class="tabledit-view-mode" style="cursor: pointer;"><form method="post" action="/owner/delete_category"> <input name="value" type="hidden" value="{{each['name']}}"> <button class="btn btn-primary">Delete</button> </form></td>
+                                    <td class="tabledit-view-mode" style="cursor: pointer;"><span class="tabledit-span"><a title="edit" href="?cat_id={{ each.id }}">Edit</a></span></td>
+                                
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end .table-responsive-->
+            </div>
+            <!-- end card-body -->
+        </div>
+
+    </div>
+{% endblock %}

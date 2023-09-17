@@ -1,0 +1,89 @@
+{% set active = "article" %}
+{% extends "admin/_layout.html" %}
+{% block title %} Add Article {% endblock %}
+
+{% block content %}
+<div class="content">
+
+  <!-- Start Content-->
+  <div class="container-fluid"> 
+
+    <!-- start page title -->
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box">
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+              <li class="breadcrumb-item"><a href="/owner/dashboard">Dashboard</a></li>
+              <li class="breadcrumb-item active">Add Article</li>
+            </ol>
+          </div>
+          <h4 class="page-title">Create Article</h4>
+        </div>
+      </div>
+    </div>
+    <!-- end page title -->
+
+
+    <!-- ADD CATEGORY ROW -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="header-title">Add Article</h4>
+          </div>
+          <form action="/owner/article/create" method="POST" enctype="multipart/form-data" class="card-body">
+            <div class="row">
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="title" class="form-label">Title</label>
+                  <input type="text" name="title" id="title" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="category" class="form-label">Category</label>
+                  <select name="category" class="form-control" id="category">
+                    <option value="" selected disabled>Select category</option>
+                    {% for category in categories %}
+                      <option value="{{ category.id }}">
+                        {{ category.name }}
+                      </option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="author" class="form-label">Author</label>
+                  <input type="text" name="author" id="author" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="image" class="form-label">Image</label>
+                  <input type="file" name="image" id="image" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="mb-3">
+                  <label for="content" class="form-label">Content</label>
+                  <textarea id="content" class="form-control" rows="5" name="content"></textarea>
+                </div>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">Add Article</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

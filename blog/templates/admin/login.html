@@ -22,6 +22,7 @@
 </head>
 
 <body class="authentication-bg position-relative">
+   
     <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5 position-relative">
         <div class="container">
             <div class="row justify-content-center">
@@ -46,13 +47,14 @@
                                         <p class="text-muted mb-3">Enter your email address and password to access
                                             account.
                                         </p>
-
+                                        <!-- {{ get_flashed_messages(with_categories=True) }} -->
+                                        {% include "admin/_alert.html" %}
                                         <!-- form -->
-                                        <form action="#">
+                                        <form action="/owner/login" method="post">
                                             <div class="mb-3">
                                                 <label for="emailaddress" class="form-label">Email address</label>
                                                 <input class="form-control" type="email" id="emailaddress" required=""
-                                                    placeholder="Enter your email">
+                                                    placeholder="Enter your email" name="email">
                                             </div>
                                             <div class="mb-3">
                                                 <a href="auth-forgotpw.html" class="text-muted float-end"><small>Forgot
@@ -60,7 +62,7 @@
                                                         password?</small></a>
                                                 <label for="password" class="form-label">Password</label>
                                                 <input class="form-control" type="password" required="" id="password"
-                                                    placeholder="Enter your password">
+                                                    placeholder="Enter your password" name="password">
                                             </div>
                                             <div class="mb-3">
                                                 <div class="form-check">

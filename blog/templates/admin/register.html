@@ -22,7 +22,8 @@
 </head>
 
 <body class="authentication-bg">
-
+    <!-- {{ get_flashed_messages(with_categories=True) }} -->
+    {% include "admin/_alert.html" %}
     <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5 position-relative">
         <div class="container">
             <div class="row justify-content-center">
@@ -48,26 +49,26 @@
                                             account.</p>
 
                                         <!-- form -->
-                                        <form action="#">
+                                        <form action="/owner/create" method="post">
                                             <div class="mb-3">
                                                 <label for="fullname" class="form-label">Full Name</label>
                                                 <input class="form-control" type="text" id="fullname"
-                                                    placeholder="Enter your name" required="">
+                                                    placeholder="Enter your name" name="name" required="">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="emailaddress" class="form-label">Email address</label>
                                                 <input class="form-control" type="email" id="emailaddress" required=""
-                                                    placeholder="Enter your email">
+                                                    placeholder="Enter your email" name="email">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="password" class="form-label">Password</label>
                                                 <input class="form-control" type="password" required="" id="password"
-                                                    placeholder="Enter your password">
+                                                    placeholder="Enter your password" name="password">
                                             </div>
                                             <div class="mb-3">
                                                 <div class="form-check">
                                                     <input type="checkbox" class="form-check-input"
-                                                        id="checkbox-signup">
+                                                        id="checkbox-signup" required>
                                                     <label class="form-check-label" for="checkbox-signup">I accept <a
                                                             href="javascript: void(0);" class="text-muted">Terms and
                                                             Conditions</a></label>
@@ -103,7 +104,7 @@
             </div>
             <div class="row">
                 <div class="col-12 text-center">
-                    <p class="text-dark-emphasis">Already have account? <a href="/owner"
+                    <p class="text-dark-emphasis">Already have account? <a href="/owner/"
                             class="text-dark fw-bold ms-1 link-offset-3 text-decoration-underline"><b>Log In</b></a>
                     </p>
                 </div> <!-- end col -->
