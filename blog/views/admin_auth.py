@@ -3,6 +3,8 @@ from ..config.database import get_connection
 from werkzeug.security import generate_password_hash, check_password_hash
 from ..utils.helper import find_item_in_list
 from ..utils.decorators import authenticate, guest, check
+from ..store.category import get_all_categories
+from ..store.article import get_all_articles
 
 admin_auth = Blueprint("admin_auth", __name__)
 db = get_connection()
@@ -105,4 +107,12 @@ def dashboard_page():
     # if not session["ADMIN_LOGIN"]:
     #     return redirect("/owner/")
     # user = session["ADMIN_LOGIN"]
-    return render_template("/admin/dashboard.html")
+    if not db: 
+        flash("Failed to connect to db", "danger")
+        return redirect("/owner/dashboard")
+  
+    _, cursor = db
+    categories = get_all_categories(cursor)
+    articles = get_all_articles(cursor)
+
+    return render_template("/admin/dashboard.html", categories=categories, articles=articles)

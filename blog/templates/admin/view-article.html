@@ -60,7 +60,7 @@
                     <td>{{ sub_words(article.content, 20) }}...</td>
                     <td>{{ article.date }}</td>
                     <td>
-                        <a title="edit" href="?cat_id={{ article.id }}" class="text-reset fs-16 px-1">
+                        <a title="edit" href="/owner/article/edit/{{ article.id }}" class="text-reset fs-16 px-1">
                             <i class="ri-pencil-line text-primary"></i>
                         </a>
                       <a title="delete" href="/owner/article/delete/{{ article.id }}" class="text-reset fs-16 px-1">

@@ -1,0 +1,92 @@
+{% set active = "article" %}
+{% extends "admin/_layout.html" %}
+{% block title %} Edit Article {% endblock %}
+
+{% block content %}
+<div class="content">
+
+  <!-- Start Content-->
+  <div class="container-fluid"> 
+
+    <!-- start page title -->
+    <div class="row">
+      <div class="col-12">
+        <div class="page-title-box">
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+              <li class="breadcrumb-item"><a href="/owner/dashboard">Dashboard</a></li>
+              <li class="breadcrumb-item active">Edit Article</li>
+            </ol>
+          </div>
+          <h4 class="page-title">Edit Article</h4>
+        </div>
+      </div>
+    </div>
+    <!-- end page title -->
+
+
+    <!-- EDIT ARTICLE ROW -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="header-title">Edit Article</h4>
+          </div>
+          <form action="/owner/article/update" method="POST" enctype="multipart/form-data" class="card-body">
+            <div class="row">
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="title" class="form-label">Title</label>
+                  <input type="text" name="title" value="{{ article.title }}" id="title" class="form-control">
+                  <input type="hidden" name="id" value="{{ article.id }}">
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="category" class="form-label">Category</label>
+                  <select name="category" value="{{ article.category }}" class="form-control" id="category">
+                    <option value="" disabled>Select category</option>
+                    {% for category in categories %}
+                      <option value="{{ category.id }}" {% if category.id == article.category %} selected {% endif %}>
+                        {{ category.name }}
+                      </option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="author" class="form-label">Author</label>
+                  <input type="text" name="author" value="{{ article.author }}" id="author" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="image" class="form-label">Image</label>
+                  <input type="file" name="image" accept="image/*" id="image" class="form-control">
+                  <input type="hidden" name="prev-image" value="{{ article.image }}" class="form-control">
+                  <small class="text-muted text-xs">Prev. image: {{ article.image }}</small>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="mb-3">
+                  <label for="content" class="form-label">Content</label>
+                  <textarea id="content" class="form-control" rows="5" name="content">{{article.content}}</textarea>
+                </div>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">Update Article</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
